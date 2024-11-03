@@ -86,6 +86,10 @@ def vote():
 
     return render_template('vote.html')
 
+@app.route('/header')
+def header():
+    return render_template('header.html')
+
 # Logout
 @app.route('/logout')
 def logout():
