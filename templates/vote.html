@@ -125,14 +125,27 @@
 
 </head>
 <body>
+
 <!-- Header -->
 <div class="header">
     <iframe src="http://127.0.0.1:5000/header" width="100%" height="100" frameborder="0"></iframe>
 </div>
+
 <!--Pop ups-->  
 <div class="alert alert-success" role="alert">
     Success! you have now logged in into the system.
     </div>
+
+    <script>
+        // Function to hide the alert after a few seconds
+        setTimeout(function() {
+            var alert = document.getElementById('successAlert');
+            if (alert) {
+                alert.style.display = 'none'; // Hide the alert
+            }
+        }, 3000); // Change 3000 to the number of milliseconds you want (3000 ms = 3 seconds)
+    </script>
+
 <!-- Main container -->
 <div class="container">
     <!-- Voting Section -->
@@ -613,6 +626,15 @@
         <!-- Submit Vote Button -->
         <button type="submit" class="submit-btn">Submit Vote</button>
     </form>
+
+
+<!-- Results Section (displayed after voting) -->
+<div class="results">
+        <h2>Results</h2>
+        <p><strong>Candidate 1:</strong> 30 votes</p>
+        <p><strong>Candidate 2:</strong> 25 votes</p>
+        <p><strong>Candidate 3:</strong> 15 votes</p>
+</div>
 
 </body>
 </html>

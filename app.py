@@ -9,12 +9,14 @@ app.config.from_object(Config)
 mysql = MySQL(app)
 
 # Home route
-@app.route('/')
+@app.route('/index')
 def index():
-    return redirect(url_for('login'))
+    if 'username' not in session:
+        return redirect(url_for('login'))
+    return render_template('index.html')  # Render your index template
 
 # Login route
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         username = request.form['username']
@@ -27,7 +29,7 @@ def login():
         
         if user and check_password_hash(user['password'], password):
             session['username'] = username
-            return redirect(url_for('vote'))
+            return redirect(url_for('index'))
         else:
             flash('Invalid credentials', 'danger')
     return render_template('login.html')
@@ -62,7 +64,6 @@ def register():
 
     return render_template('register.html')
 
-
 # Voting page
 @app.route('/vote', methods=['GET', 'POST'])
 def vote():
@@ -86,6 +87,7 @@ def vote():
 
     return render_template('vote.html')
 
+# Header
 @app.route('/header')
 def header():
     return render_template('header.html')
@@ -93,6 +95,7 @@ def header():
 # Logout
 @app.route('/logout')
 def logout():
+    print("Logging out user:", session.get('username'))
     session.pop('username', None)
     return redirect(url_for('login'))
 
