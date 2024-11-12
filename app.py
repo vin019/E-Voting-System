@@ -87,6 +87,11 @@ def vote():
 
     return render_template('vote.html')
 
+# About
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
 # Header
 @app.route('/header')
 def header():
