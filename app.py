@@ -90,6 +90,8 @@ def vote():
 # About
 @app.route('/about')
 def about():
+    if 'username' not in session:
+        return redirect(url_for('login'))
     return render_template('about.html')
 
 # Header

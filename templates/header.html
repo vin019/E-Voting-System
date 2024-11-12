@@ -30,21 +30,6 @@
             background-image: url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 30 30"%3E%3Cpath stroke="white" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E'); /* Change icon color to white */
         }
 
-        .btn-logout {
-            color: white; /* Default text color */
-            background-color: transparent; /* Ensure the button has a transparent background */
-            padding: 0.5rem 1rem; /* Consistent padding */
-            border-radius: 0.25rem; /* Optional: rounded corners */
-            border: 1px solid transparent; /* Ensure there's no border by default */
-            transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for both background and text color */
-        }
-
-        .btn-logout:hover, .btn-logout.active {
-            background-color: white; /* White background on hover or active */
-            color: black !important; /* Black text on hover or active */
-            border: 1px solid transparent; /* Maintain border on hover or active */
-        }
-
         .navbar {
             justify-content: flex-end; /* Align all navbar items to the right */
         }
@@ -55,7 +40,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #B80D0D;">
         <a class="navbar-brand mx-auto d-flex align-items-center" href="{{ url_for('index') }}" target="_parent"> 
             <img src="http://127.0.0.1:5000/static/Logo/Coat_of_arms_of_the_Philippines.svg.png" width="30" height="33" class="d-inline-block align-top mr-2" alt="">
-            <img src='http://127.0.0.1:5000/static/Logo/Copy of LNU LOGO.PNG' width="33" height="33" class="d-inline-block align-top mr-2" alt="">
+            <img src='http://127.0.0.1:5000/static/Logo/Copy of LNU LOGO.PNG' width="33" height="auto" class="d-inline-block align-top mr-2" alt="">
             LEYTE NORMAL UNIVERSITY
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,12 +58,13 @@
                     <a class="nav-link" href="{{ url_for('about') }}" target="_parent">About</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link btn-logout" href="{{ url_for('logout') }}" target="_parent">Logout</a>
+                    <a class="nav-link" href="{{ url_for('logout') }}" target="_parent">Logout</a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <a class="link-secondary" href="#" aria-label="Search">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3" role="img" viewBox="0 0 24 24"><title>Search</title><circle cx="10.5" cy="10.5" r="7.5"/><path d="M21 21l-5.2-5.2"/></svg>
+                  </a>
             </form>
         </div>
     </nav>
