@@ -1,22 +1,22 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify
 from flask_mysqldb import MySQL
 from werkzeug.security import generate_password_hash, check_password_hash
 from config import Config
+import time
 
 app = Flask(__name__)
 app.config.from_object(Config)
 
 mysql = MySQL(app)
 
-# Home route
-@app.route('/index')
+@app.route('/')
 def index():
     if 'username' not in session:
         return redirect(url_for('login'))
     return render_template('index.html')  # Render your index template
 
 # Login route
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         username = request.form['username']
