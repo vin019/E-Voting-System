@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Vote Results</title>
+</head>
+<body>
+    <h1>Vote Results</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Candidate ID</th>
+                <th>Votes</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in vote_results %}
+            <tr>
+                <td>{{ result.candidate_id }}</td>
+                <td>{{ result.votes }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

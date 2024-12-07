@@ -23,3 +23,10 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}

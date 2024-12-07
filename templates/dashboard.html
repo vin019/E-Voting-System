@@ -3,11 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>E-Voting Admin Dashboard</title>
+    <link rel="stylesheet" href="http://127.0.0.1:5000/static/CSS/dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <h1>Welcome, {{ session['username'] }}</h1>
-    <a href="{{ url_for('vote') }}">Go Vote</a>
-    <a href="{{ url_for('logout') }}">Logout</a>
+    <div class="dashboard-container">
+
+        <header class="dashboard-header">
+            <h1>E-Voting Admin Dashboard</h1>
+            <p>Track user activities in the e-voting system.</p>
+        </header>
+
+        <div class="stats-container">
+            <div class="stat-box">
+                <h3>Total Logins</h3>
+                <p id="totalLogins">0</p>
+            </div>
+            <div class="stat-box">
+                <h3>Email Changes</h3>
+                <p id="totalEmailChanges">0</p>
+            </div>
+        </div>
+
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search by User ID or Email...">
+        </div>
+
+        <h2>Logged In Users</h2>
+        <div class="table-container">
+            <table id="loginTable">
+                <thead>
+                    <tr>
+                        <th>User ID</th>
+                        <th>Email</th>
+                        <th>Last Login</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+
+        <h2>Email Change Logs</h2>
+        <div class="table-container">
+            <table id="emailChangeTable">
+                <thead>
+                    <tr>
+                        <th>User ID</th>
+                        <th>Old Email</th>
+                        <th>New Email</th>
+                        <th>Change Timestamp</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+
+        <h2>Login Activity</h2>
+        <div class="chart-container">
+            <canvas id="loginChart"></canvas>
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
 </body>
 </html>

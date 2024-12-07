@@ -1,15 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="http://127.0.0.1:5000/static/CSS/index.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="http://127.0.0.1:5000/static/CSS/index.css">
+<link rel="icon" href="http://127.0.0.1:5000/static/Logo/spark.png" type="image/png">
+<link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/navbars-offcanvas/">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+<link href="http://127.0.0.1:5000/static/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom styles for this template -->
+    <title>Header</title>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
+        <div class="container-fluid">
+            <a class="navbar-brand mx-auto d-flex align-items-center" href="{{ url_for('index') }}" > 
+                <img src="http://127.0.0.1:5000/static/Logo/image.png" width="30" height="auto" class="d-inline-block align-top me-2" color alt="">
+                <img src='http://127.0.0.1:5000/static/Logo/LNU.PNG' width="33" height="auto" class="d-inline-block align-top me-3" alt="">
+                EVS
+            </a>          
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbar2Label">
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasNavbar2Label">Offcanvas</h5>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="{{ url_for('index') }}" target="_parent">Home</a> 
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ url_for('vote') }}">Vote!</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ url_for('about') }}">About</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{url_for(vote_results)}}">View Vote Results</a>
+                </li>
+              </ul>
+              <form class="d-flex mt-3 mt-lg-0" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>    
 </head>
 <body>
-    
-    <div class="header">
-        <iframe src="http://127.0.0.1:5000/header" width="100%" height="100%" frameborder="0"></iframe>    
-    </div>
     <div class="header a">
         <h1 style="margin: 10px;">WELCOME!</h1>
         <p style="margin: 10px;">To the LNU Online Voting System for the University-wide organization</p>
@@ -20,27 +66,42 @@
             <h2>LEYTE NORMAL UNIVERSITY COLLEGES</h2>
         </div>
     </section>
-    <section id="boxes">
-        <div class="container">
-            <div class="box">
-                <img src="http://127.0.0.1:5000/static/Logo/CAS.webp" alt="College of Arts and Sciences">
-                <h3>CAS</h3>
-                <p>College of Arts and Sciences</p>
+    <section id="gallery" class="container">
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <div class="gallery">
+                    <a target="_blank" href="images/CAS.webp">
+                        <img src="http://127.0.0.1:5000/static/Logo/CAS.webp" alt="CAS">
+                    </a>
+                    <div class="description">College of Arts and Sciences</div>
+                </div>
             </div>
-            <div class="box">
-                <img src="http://127.0.0.1:5000/static/Logo/COE.webp" alt="College of Education">
-                <h3>COE</h3>
-                <p>College of Education</p>
+            <div class="col-md-4 mb-3">
+                <div class="gallery">
+                    <a target="_blank" href="images/CME.png">
+                        <img src="http://127.0.0.1:5000/static/Logo/CME.png" alt="CME">
+                    </a>
+                    <div class="description">College of Management and Entrepreneurship</div>
+                </div>
             </div>
-            <div class="box">
-                <img src="http://127.0.0.1:5000/static/Logo/CME.png" alt="College of Management and Entrepreneurship">
-                <h3>CME</h3>
-                <p>College of Management and Entrepreneurship</p>
+            <div class="col-md-4 mb-3">
+                <div class="gallery">
+                    <a target="_blank" href="images/COE.webp">
+                        <img src="http://127.0.0.1:5000/static/Logo/COE.webp" alt="COE">
+                    </a>
+                    <div class="description">College of Education</div>
+                </div>
             </div>
         </div>
     </section>
-    <div class="header">
-        <h1>Welcome!</h1>
-    </div>
+    
+    <script src="http://127.0.0.1:5000/static/assets/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Footer-->
+    <footer class="py-5 bg-black">
+        <div class="container px-5"><p class="m-0 text-center text-white small">Copyright &copy; Your Website 2023</p></div>
+    </footer>
 </body>
 </html>

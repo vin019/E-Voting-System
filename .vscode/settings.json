@@ -1,0 +1,46 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "localhost",
+            "database": "e_voting_system",
+            "username": "Vin",
+            "password": "cheesecake"
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "XAMPP MySQL",
+            "database": "e_voting_system",
+            "username": "Vin"
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "XAMPP localhost",
+            "username": "Vin",
+            "group": "local Servers",
+            "password": "cheesecake",
+            "database": "e_voting_system"
+        }
+    ]
+}
