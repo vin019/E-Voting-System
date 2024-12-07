@@ -28,6 +28,7 @@ def login():
         
         if user and check_password_hash(user['password'], password):
             session['username'] = username
+            flash('Login successful!', 'success')
             return redirect(url_for('index'))
         else:
             flash('Invalid credentials', 'danger')
@@ -91,7 +92,8 @@ def vote():
 def about():
     if 'username' not in session:
         return redirect(url_for('login'))
-    return render_template('about.html')
+    else:
+        return render_template('about.html')
 
 # Header
 @app.route('/header')
