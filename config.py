@@ -1,10 +1,9 @@
 import os
 
-
 class Config:
-    SECRET_KEY = os.getenv('SECRET_KEY', 'default_secret')
-    MYSQL_USER = 'your_mysql_user'
-    MYSQL_PASSWORD = 'your_mysql_password'
-    MYSQL_DB = 'e_voting_system'
+    SECRET_KEY = 'default_secret'
     MYSQL_HOST = 'localhost'
-    MYSQL_PORT = 3306
+    MYSQL_USER = 'Vin'
+    MYSQL_PASSWORD = 'cheesecake'
+    MYSQL_DB = 'e_voting_system'
+    MYSQL_CURSORCLASS = 'DictCursor'
