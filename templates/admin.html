@@ -3,506 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Voting System</title>
+    <title>E-Voting Admin Dashboard</title>
     <link rel="stylesheet" href="http://127.0.0.1:5000/static/CSS/admin.css">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/navbars-offcanvas/">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+    <link href="http://127.0.0.1:5000/static/assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
+</head>
 <body>
-    <!-- Header -->
-    <div class="header">
-        <h1>Admin E-Voting System for Leyte Normal University</h1>
-    </div>
-    <br>
-
-    <html class="container">
-        <h2>PRESIDENT</h2>
-
-<form action="#" method="POST">
-    <!-- Candidates List -->
-    <div class="candidates-list">
-        <!-- Candidate 1 -->
-        <div class="candidate" id="president 1">
-            <img src="https://via.placeholder.com/100" alt="Candidate 1">
-            <h3>Candidate 1</h3>
-            <h4>Bacsarsa</h4>
-            <p>President</p>
-            <div class="tooltip">
-                <button type="button" onclick="openModal('president',1)">Edit</button>
-                <span class="tooltiptext">Edit Candidate 1</span>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ url_for('index') }}">E-Voting System</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('vote') }}">Vote</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('about') }}">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('admin') }}">Admin</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('dashboard') }}">Edit Users</a>
+                    </li>
+                </ul>
             </div>
         </div>
+    </nav>
 
-        <!-- Candidate 2 -->
-        <div class="candidate" id="president 2">
-            <img src="https://via.placeholder.com/100" alt="Candidate 2">
-            <h3>Candidate 2</h3>
-            <h4>Intino</h4>
-            <p>President</p>
-            <div class="tooltip">
-                <button type="button" onclick="openModal('president',2)">Edit</button>
-                <span class="tooltiptext">Edit Candidate 2</span>
-            </div>
-        </div>
+    <div class="admin-container">
+        <header class="admin-header">
+            <h1>Admin Dashboard</h1>
+            <p>Manage candidates and oversee the e-voting process.</p>
+        </header>
 
-        <!-- Candidate 3 -->
-        <div class="candidate" id="president 3">
-            <img src="https://via.placeholder.com/100" alt="Candidate 3">
-            <h3>Candidate 3</h3>
-            <h4>Lagarto</h4>
-            <p>President</p>
-            <div class="tooltip">
-                <button type="button" onclick="openModal('president',3)">Edit</button>
-                <span class="tooltiptext">Edit Candidate 3</span>
+        <h2>Add New Candidate</h2>
+        <form action="{{ url_for('add_candidate') }}" method="POST" style="max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; background-color: #f9f9f9; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+            <div style="margin-bottom: 15px;">
+                <label for="candidateName" style="font-weight: bold;">Candidate Name:</label>
+                <input type="text" id="candidateName" name="candidateName" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
             </div>
-        </div>
-    </div>
-</form>
-<br>
-<br>
-<br>
-<br>
-<br>
-
-        <!-- Voting Section -->
-        <h2>VICE-PRESIDENT</h2>
-    <div class="candidates-list">
-        <!-- Candidate 1 -->
-        <div class="candidate" id="vice-president 1">
-            <img src="https://via.placeholder.com/100" alt="Candidate 1">
-            <h3>Candidate 1</h3>
-            <h4>Bacsarsa</h4>
-            <p>Vice-President</p>
-            <div class="tooltip">
-                <button type="button" onclick="openModal('vice-president',1)">Edit</button>
-                <span class="tooltiptext">Edit Candidate 1</span>
+            <div style="margin-bottom: 15px;">
+                <label for="candidatePosition" style="font-weight: bold;">Position:</label>
+                <input type="text" id="candidatePosition" name="candidatePosition" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
             </div>
-        </div>
-
-        <!-- Candidate 2 -->
-        <div class="candidate" id="vice-president 2">
-            <img src="https://via.placeholder.com/100" alt="Candidate 2">
-            <h3>Candidate 2</h3>
-            <h4>Intino</h4>
-            <p>Vice-President</p>
-            <div class="tooltip">
-                <button type="button" onclick="openModal('vice-president',2)">Edit</button>
-                <span class="tooltiptext">Edit Candidate 2</span>
+            
+            <h3 style="margin-top: 20px;">Add New Election (Optional)</h3>
+            <div style="margin-bottom: 15px;">
+                <label for="electionId" style="font-weight: bold;">Election ID:</label>
+                <input type="text" id="electionId" name="electionId" placeholder="Enter new election ID (if applicable)" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
             </div>
-        </div>
-
-        <!-- Candidate 3 -->
-        <div class="candidate" id="vice-president 3">
-            <img src="https://via.placeholder.com/100" alt="Candidate 3">
-            <h3>Candidate 3</h3>
-            <h4>Lagarto</h4>
-            <p>Vice-President</p>
-            <div class="tooltip">
-                <button type="button" onclick="openModal('vice-president',3)">Edit</button>
-                <span class="tooltiptext">Edit Candidate 3</span>
+            <div style="margin-bottom: 15px;">
+                <label for="electionName" style="font-weight: bold;">Election Name:</label>
+                <input type="text" id="electionName" name="electionName" placeholder="Enter election name (if applicable)" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
             </div>
-        </div>
-    </div>
-</form>
-<br>
-<br>
-<br>
-<br>
-<br>
-
-        <!-- Voting Section -->
-        <h2>SECRETARY</h2>
-    <div class="candidates-list">
-        <!-- Candidate 1 -->
-        <div class="candidate" id="secretary 1">
-            <img src="https://via.placeholder.com/100" alt="Candidate 1">
-            <h3>Candidate 1</h3>
-            <h4>Bacsarsa</h4>
-            <p>Secretary</p>
-            <div class="tooltip">
-                <button type="button" onclick="openModal('secretary', 1)">Edit</button>
-                <span class="tooltiptext">Edit Candidate 1</span>
+            <div style="margin-bottom: 15px;">
+                <label for="startDate" style="font-weight: bold;">Start Date:</label>
+                <input type="date" id="startDate" name="startDate" placeholder="Select start date (if applicable)" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
             </div>
-        </div>
-
-        <!-- Candidate 2 -->
-        <div class="candidate" id="secretary 2">
-            <img src="https://via.placeholder.com/100" alt="Candidate 2">
-            <h3>Candidate 2</h3>
-            <h4>Intino</h4>
-            <p>Secretary</p>
-            <div class="tooltip">
-                <button type="button" onclick="openModal('secretary', 2)">Edit</button>
-                <span class="tooltiptext">Edit Candidate 2</span>
-            </div>
-        </div>
-
-        <!-- Candidate 3 -->
-        <div class="candidate" id="secretary 3">
-            <img src="https://via.placeholder.com/100" alt="Candidate 3">
-            <h3>Candidate 3</h3>
-            <h4>Lagarto</h4>
-            <p>Secretary</p>
-            <div class="tooltip">
-                <button type="button" onclick="openModal('secretary', 3)">Edit</button>
-                <span class="tooltiptext">Edit Candidate 3</span>
-            </div>
-        </div>
-    </div>
-</form>
-<br>
-<br>
-<br>
-<br>
-<br>
-
-        <!-- Voting Section -->
-        <h2>TREASURER</h2>
-    <div class="candidates-list">
-        <!-- Candidate 1 -->
-        <div class="candidate" id="treasurer 1">
-            <img src="https://via.placeholder.com/100" alt="Candidate 1">
-            <h3>Candidate 1</h3>
-            <h4>Bacsarsa</h4>
-            <p>Treasurer</p>
-            <div class="tooltip">
-                <button type="button" onclick="openModal('treasurer', 1)">Edit</button>
-                <span class="tooltiptext">Edit Candidate 1</span>
-            </div>
-        </div>
-
-        <!-- Candidate 2 -->
-        <div class="candidate" id="treasurer 2">
-            <img src="https://via.placeholder.com/100" alt="Candidate 2">
-            <h3>Candidate 2</h3>
-            <h4>Intino</h4>
-            <p>Treasurer</p>
-            <div class="tooltip">
-                <button type="button" onclick="openModal('treasurer', 2)">Edit</button>
-                <span class="tooltiptext">Edit Candidate 2</span>
-            </div>
-        </div>
-
-        <!-- Candidate 3 -->
-        <div class="candidate" id="treasurer 3">
-            <img src="https://via.placeholder.com/100" alt="Candidate 3">
-            <h3>Candidate 3</h3>
-            <h4>Lagarto</h4>
-            <p>Treasurer</p>
-            <div class="tooltip">
-                <button type="button" onclick="openModal('treasurer', 3)">Edit</button>
-                <span class="tooltiptext">Edit Candidate 3</span>
-            </div>
-        </div>
-    </div>
-</form>
-<br>
-<br>
-<br>
-<br>
-<br>
-
-        <!-- Voting Section -->
-        <h2>AUDITOR</h2>
-    <div class="candidates-list">
-        <!-- Candidate 1 -->
-        <div class="candidate" id="auditor 1">
-            <img src="https://via.placeholder.com/100" alt="Candidate 1">
-            <h3>Candidate 1</h3>
-            <h4>Bacsarsa</h4>
-            <p>Auditor</p>
-            <div class="tooltip">
-                <button type="button" onclick="openModal('auditor', 1)">Edit</button>
-                <span class="tooltiptext">Edit Candidate 1</span>
-            </div>
-        </div>
-
-        <!-- Candidate 2 -->
-        <div class="candidate" id="auditor 2">
-            <img src="https://via.placeholder.com/100" alt="Candidate 2">
-            <h3>Candidate 2</h3>
-            <h4>Intino</h4>
-            <p>Auditor</p>
-            <div class="tooltip">
-                <button type="button" onclick="openModal('auditor', 2)">Edit</button>
-                <span class="tooltiptext">Edit Candidate 2</span>
-            </div>
-        </div>
-
-        <!-- Candidate 3 -->
-        <div class="candidate" id="auditor 3">
-            <img src="https://via.placeholder.com/100" alt="Candidate 3">
-            <h3>Candidate 3</h3>
-            <h4>Lagarto</h4>
-            <p>Auditor</p>
-            <div class="tooltip">
-                <button type="button" onclick="openModal('auditor', 3)">Edit</button>
-                <span class="tooltiptext">Edit Candidate 3</span>
-            </div>
-        </div>
-    </div>
-</form>
-<br>
-<br>
-<br>
-<br>
-<br>
+            <div style="margin-bottom: 15px;">
+                <label for="endDate" style="font-weight: bold;">End Date:</label>
+                <input type="date" id="endDate" name="endDate" placeholder="Select end date (if applicable)" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+            </div>  
         
-        <!-- Voting Section -->
-        <h2>P.I.O</h2>
-            <div class="candidates-list">
-                <!-- Candidate 1 -->
-                <div class="candidate" id="pio 1">
-                    <img src="https://via.placeholder.com/100" alt="Candidate 1">
-                    <h3>Candidate 1</h3>
-                    <h4>Bacsarsa</h4>
-                    <p>P.I.O</p>
-                    <div class="tooltip">
-                        <button type="button" onclick="openModal('pio', 1)">Edit</button>
-                        <span class="tooltiptext">Edit Candidate 1</span>
-                    </div>
-                </div>
-    
-                <!-- Candidate 2 -->
-                <div class="candidate" id="pio 2">
-                    <img src="https://via.placeholder.com/100" alt="Candidate 2">
-                    <h3>Candidate 2</h3>
-                    <h4>Intino</h4>
-                    <p>P.I.O</p>
-                    <div class="tooltip">
-                        <button type="button" onclick="openModal('pio', 2)">Edit</button>
-                        <span class="tooltiptext">Edit Candidate 2</span>
-                    </div>
-                </div>
-    
-                <!-- Candidate 3 -->
-                <div class="candidate" id="pio 3">
-                    <img src="https://via.placeholder.com/100" alt="Candidate 3">
-                    <h3>Candidate 3</h3>
-                    <h4>Lagarto</h4>
-                    <p>P.I.O</p>
-                    <div class="tooltip">
-                        <button type="button" onclick="openModal('pio', 3)">Edit</button>
-                        <span class="tooltiptext">Edit Candidate 3</span>
-                    </div>
-                </div>
+            <div style="margin-bottom: 15px;">
+                <label for="existingElectionId" style="font-weight: bold;">Or select an existing election ID:</label>
+                <select id="existingElectionId" name="existingElectionId" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                    <option value="">Select an existing election ID</option>
+                    {% for election in elections %}
+                        <option value="{{ election.id, election.name }}">{{ election.id, election.name }}</option>
+                    {% endfor %}
+                </select>
             </div>
+            <button type="submit" style="width: 100%; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 4px; font-size: 16px; cursor: pointer;">Add Candidate</button>
         </form>
-<br>
-<br>
-<br>
-<br>
-<br>
         
-        <!-- Voting Section -->
-        <h2>1st REPRESENTATIVE</h2>
-    <div class="candidates-list">
-        <!-- Candidate 1 -->
-        <div class="candidate" id="1st 1">
-            <img src="https://via.placeholder.com/100" alt="Candidate 1">
-            <h3>Candidate 1</h3>
-            <h4>Bacsarsa</h4>
-            <p>1st Representative</p>
-            <div class="tooltip">
-                <button type="button" onclick="openModal('1st', 1)">Edit</button>
-                <span class="tooltiptext">Edit Candidate 1</span>
+        <h2>Candidates</h2>
+        <div class="candidates-list">
+            {% for candidate in candidates %}
+            <div class="candidate" id="candidate{{ candidate.id }}" style="margin-bottom: 20px; padding: 10px; border: 1px solid #ccc; border-radius: 8px; background-color: #f9f9f9;">
+                <h3>{{ candidate.name }}</h3>
+                <p>Position: {{ candidate.position }}</p>
+                <p>Election: {{ candidate.election_name if candidate.election_name else 'Not Assigned' }}</p>
+                <button type="button" onclick="openEditModal({{ candidate.id }}, '{{ candidate.name }}', '{{ candidate.position }}')" style="background-color:rgb(220, 181, 53); border-radius: 4px; padding: 5px 10px; cursor: pointer;">Edit</button>
+                <button type="button" onclick="deleteCandidate({{ candidate.id }})" style="background-color: #dc3545; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer;">Delete</button>
             </div>
-        </div>
-
-        <!-- Candidate 2 -->
-        <div class="candidate" id="1st 2">
-            <img src="https://via.placeholder.com/100" alt="Candidate 2">
-            <h3>Candidate 2</h3>
-            <h4>Intino</h4>
-            <p>1st Representative</p>
-            <div class="tooltip">
-                <button type="button" onclick="openModal('1st', 2)">Edit</button>
-                <span class="tooltiptext">Edit Candidate 2</span>
-            </div>
-        </div>
-
-        <!-- Candidate 3 -->
-        <div class="candidate" id="1st  3">
-            <img src="https://via.placeholder.com/100" alt="Candidate 3">
-            <h3>Candidate 3</h3>
-            <h4>Lagarto</h4>
-            <p>1st Representative</p>
-            <div class="tooltip">
-                <button type="button" onclick="openModal('1st', 3)">Edit</button>
-                <span class="tooltiptext">Edit Candidate 3</span>
-            </div>
+            {% endfor %}
         </div>
     </div>
-</form>
-<br>
-<br>
-<br>
-<br>
-<br>
- 
-        <!-- Voting Section -->
-        <h2>2nd REPRESENTATIVE</h2>
-            <div class="candidates-list">
-                <!-- Candidate 1 -->
-                <div class="candidate" id="2nd 1">
-                    <img src="https://via.placeholder.com/100" alt="Candidate 1">
-                    <h3>Candidate 1</h3>
-                    <h4>Bacsarsa</h4>
-                    <p>2nd Representative</p>
-                    <div class="tooltip">
-                        <button type="button" onclick="openModal('2nd', 1)">Edit</button>
-                        <span class="tooltiptext">Edit Candidate 1</span>
-                    </div>
-                </div>
-        
-                <!-- Candidate 2 -->
-                <div class="candidate" id="2nd 2">
-                    <img src="https://via.placeholder.com/100" alt="Candidate 2">
-                    <h3>Candidate 2</h3>
-                    <h4>Intino</h4>
-                    <p>2nd Representative</p>
-                    <div class="tooltip">
-                        <button type="button" onclick="openModal('2nd', 2)">Edit</button>
-                        <span class="tooltiptext">Edit Candidate 2</span>
-                    </div>
-                </div>
-        
-                <!-- Candidate 3 -->
-                <div class="candidate" id="2nd 3">
-                    <img src="https://via.placeholder.com/100" alt="Candidate 3">
-                    <h3>Candidate 3</h3>
-                    <h4>Lagarto</h4>
-                    <p>2nd Representative</p>
-                    <div class="tooltip">
-                        <button type="button" onclick="openModal('2nd', 3)">Edit</button>
-                        <span class="tooltiptext">Edit Candidate 3</span>
-                    </div>
-                </div>
-            </div>
-        </form>
-<br>
-<br>
-<br>
-<br>
-<br>
 
-        <!-- Voting Section -->
-        <h2>3rd REPRESENTATIVE</h2>
-            <div class="candidates-list">
-                <!-- Candidate 1 -->
-                <div class="candidate" id="3rd 1">
-                    <img src="https://via.placeholder.com/100" alt="Candidate 1">
-                    <h3>Candidate 1</h3>
-                    <h4>Bacsarsa</h4>
-                    <p>3rd Representative</p>
-                    <div class="tooltip">
-                        <button type="button" onclick="openModal('3rd', 1)">Edit</button>
-                        <span class="tooltiptext">Edit Candidate 1</span>
-                    </div>
-                </div>
-        
-                <!-- Candidate 2 -->
-                <div class="candidate" id="3rd 2">
-                    <img src="https://via.placeholder.com/100" alt="Candidate 2">
-                    <h3>Candidate 2</h3>
-                    <h4>Intino</h4>
-                    <p>3rd Representative</p>
-                    <div class="tooltip">
-                        <button type="button" onclick="openModal('3rd', 2)">Edit</button>
-                        <span class="tooltiptext">Edit Candidate 2</span>
-                    </div>
-                </div>
-        
-                <!-- Candidate 3 -->
-                <div class="candidate" id="3rd 3">
-                    <img src="https://via.placeholder.com/100" alt="Candidate 3">
-                    <h3>Candidate 3</h3>
-                    <h4>Lagarto</h4>
-                    <p>3rd Representative</p>
-                    <div class="tooltip">
-                        <button type="button" onclick="openModal('3rd', 3)">Edit</button>
-                        <span class="tooltiptext">Edit Candidate 3</span>
-                    </div>
-                </div>
-            </div>
-        </form>
-<br>
-<br>
-<br>
-<br>
-<br>
-
-        <!-- Voting Section -->
-        <h2>4th REPRESENTATIVE</h2>
-            <div class="candidates-list">
-                <!-- Candidate 1 -->
-                <div class="candidate" id="4th 1">
-                    <img src="https://via.placeholder.com/100" alt="Candidate 1">
-                    <h3>Candidate 1</h3>
-                    <h4>Bacsarsa</h4>
-                    <p>fourth Representative</p>
-                    <div class="tooltip">
-                        <button type="button" onclick="openModal('4th', 1)">Edit</button>
-                        <span class="tooltiptext">Edit Candidate 1</span>
-                    </div>
-                </div>
-        
-                <!-- Candidate 2 -->
-                <div class="candidate" id="4th 2">
-                    <img src="https://via.placeholder.com/100" alt="Candidate 2">
-                    <h3>Candidate 2</h3>
-                    <h4>Intino</h4>
-                    <p>4th Representative</p>
-                    <div class="tooltip">
-                        <button type="button" onclick="openModal('4th', 2)">Edit</button>
-                        <span class="tooltiptext">Edit Candidate 2</span>
-                    </div>
-                </div>
-        
-                <!-- Candidate 3 -->
-                <div class="candidate" id="4th 3">
-                    <img src="https://via.placeholder.com/100" alt="Candidate 3">
-                    <h3>Candidate 3</h3>
-                    <h4>Lagarto</h4>
-                    <p>4th Representative</p>
-                    <div class="tooltip">
-                        <button type="button" onclick="openModal('4th', 3)">Edit</button>
-                        <span class="tooltiptext">Edit Candidate 3</span>
-                    </div>
-                </div>
-            </div>
-        </form>
-<br>
-<br>
-<br>
-<br>
-<br>
-
-
-    <button type="button" onclick="viewResults()">View Results</button>
-
-    <h2>Results</h2>
-    <div id="results" class="results" style="display: none;">
-        <h3>Voting Results</h3>
-        <div id="resultsContent"></div>
-    </div>
-        
-<div id="myModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <h3>Edit Candidate</h3>
-        <div>
-            <label for="editName">Candidate Name:</label>
-            <input type="text" id="editName" required>
-        </div>
-        <div>
-            <label for="editPosition">Position:</label>
-            <input type="text" id="editPosition" required>
-        </div>
-        <button type="button" id="saveBtn">Save</button>
-        <button type="button" onclick="closeModal()">Cancel</button>
-    </div>
-</div>
-
-<script src="admin_script.js"></script>
-</div>
+    <script>
+        function openEditModal(id, name, position) {
+            // Implement the modal opening logic here
+        }
+        function deleteCandidate(candidateId) {
+            if (confirm('Are you sure you want to delete this candidate?')) {
+                // Make an AJAX request to delete the candidate
+                fetch(`/delete_candidate/${candidateId}`, {
+                    method: 'DELETE'
+                })
+                .then(response => {
+                    if (response.ok) {
+                        document.getElementById(`candidate${candidateId}`).remove();
+                        alert('Candidate deleted successfully.');
+                    } else {
+                        alert('Error deleting candidate.');
+                    }
+                });
+            }
+        }
+    </script>
 </body>
-</html> 
+</html>
