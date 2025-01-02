@@ -3,63 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    <link href="http://127.0.0.1:5000/static/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <title>E-Voting System</title>
     <style>
         /* General styles */
         body {
             font-family: Arial, sans-serif;
-            margin: 0;  
+            margin: 0;
             padding: 0;
-            background-repeat: no-repeat;
-            background-size: cover; /* Make the image cover the entire background */
-            background-position: center; /* Center the image */
-            width: auto;
+            background: #f8f9fa;
         }
         .container {
-            width: 80%;
-            margin: 20px auto;  
-            background-color: rgba(255, 255, 255, 0.8);
+            margin: 20px auto;
+            background-color: #fff;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             padding: 20px;
             border-radius: 8px;
         }
-        h1
-         {
+        h1, h2, h3 {
             text-align: center;
-            color: #ffffff;
+            margin-bottom: 20px;
         }
-        h2
-        {
-            text-align: center;
-            color: #0c0c0c;
-        }
-
         .alert {
-            padding: 10px 15px; /* Reduce padding */
-            font-size: 14px; /* Adjust font size */
-            margin: 10px auto; /* Center the alert with some margin */
-            max-width: 300px; /* Set a maximum width */
-            text-align: center; /* Center text */
+            padding: 10px 15px;
+            font-size: 14px;
+            margin: 10px auto;
+            max-width: 300px;
+            text-align: center;
         }
-
-
-
-        /* Voting form styles */
         form {
             margin: 20px 0;
-        }
-        label {
-            font-weight: bold;
-        }
-        .form-group {
-            margin-bottom: 20px;
         }
         .candidates-list {
             display: flex;
             justify-content: space-around;
+            flex-wrap: wrap;
             margin: 20px 0;
         }
         .candidate {
@@ -67,8 +45,9 @@
             background-color: #f0f0f0;
             padding: 10px;
             border-radius: 8px;
-            box-shadow: 0px 2px 4px rgba(2, 2, 2, 0.1);
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
             width: 180px;
+            margin: 10px;
         }
         .candidate img {
             width: 100px;
@@ -86,9 +65,6 @@
         input[type="radio"] {
             margin-right: 10px;
         }
-
-
-        /* Submit button */
         .submit-btn {
             display: block;
             width: 100%;
@@ -103,669 +79,136 @@
         .submit-btn:hover {
             background-color: #0056b3;
         }
-
-
-        /* Results section */
-        .results {
-            margin-top: 40px;
-            background-color: #d1ecf1;
-            padding: 20px;
-            border: 1px solid #bee5eb;
-            border-radius: 8px;
-        }
-        .results h2 {
-            color: #0c5460;
-        }
-        .results p {
-            font-size: 18px;
-            line-height: 1.5;
-            color: #0c5460;
-        }
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            user-select: none;
-          }
-    
-          @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-              font-size: 3.5rem;
-            }
-          }
-    
-          .b-example-divider {
-            width: 100%;
-            height: 3rem;
-            background-color: rgba(0, 0, 0, .1);
-            border: solid rgba(0, 0, 0, .15);
-            border-width: 1px 0;
-            box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
-          }
-    
-          .b-example-vr {
-            flex-shrink: 0;
-            width: 1.5rem;
-            height: 100vh;
-          }
-    
-          .bi {
-            vertical-align: -.125em;
-            fill: currentColor;
-          }
-    
-          .nav-scroller {
-            position: relative;
-            z-index: 2;
-            height: 2.75rem;
-            overflow-y: hidden;
-          }
-    
-          .nav-scroller .nav {
-            display: flex;
-            flex-wrap: nowrap;
-            padding-bottom: 1rem;
-            margin-top: -1px;
-            overflow-x: auto;
-            text-align: center;
-            white-space: nowrap;
-            -webkit-overflow-scrolling: touch;
-          }
-    
-          .btn-bd-primary {
-            --bd-violet-bg: #712cf9;
-            --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
-    
-            --bs-btn-font-weight: 600;
-            --bs-btn-color: var(--bs-white);
-            --bs-btn-bg: var(--bd-violet-bg);
-            --bs-btn-border-color: var(--bd-violet-bg);
-            --bs-btn-hover-color: var(--bs-white);
-            --bs-btn-hover-bg: #6528e0;
-            --bs-btn-hover-border-color: #6528e0;
-            --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
-            --bs-btn-active-color: var(--bs-btn-hover-color);
-            --bs-btn-active-bg: #5a23c8;
-            --bs-btn-active-border-color: #5a23c8;
-          }
-    
-          .bd-mode-toggle {
-            z-index: 1500;
-          }
-    
-          .bd-mode-toggle .dropdown-menu .active .bi {
-            display: block !important;
-          }
-        </style>
-
+    </style>
 </head>
 <body>
 
-    <title>Header</title>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand mx-auto d-flex align-items-center" href="{{ url_for('index') }}" > 
-                <img src="http://127.0.0.1:5000/static/Logo/image.png" width="30" height="auto" class="d-inline-block align-top me-2" color alt="">
-                <img src='http://127.0.0.1:5000/static/Logo/LNU.PNG' width="33" height="auto" class="d-inline-block align-top me-3" alt="">
+                <img src="http://127.0.0.1:5000/static/Logo/image.png" width="30" height="auto" class="d-inline-block align-top me-2" alt="">
+                <img src="http://127.0.0.1:5000/static/Logo/LNU.PNG" width="33" height="auto" class="d-inline-block align-top me-3" alt="">
                 EVS
-            </a>          
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbar2Label">
-            <div class="offcanvas-header">
-              <h5 class="offcanvas-title" id="offcanvasNavbar2Label">Offcanvas</h5>
-              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('index') }}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('vote') }}">Vote!</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('about') }}">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('vote_results') }}">Vote Results</a>
+                    </li>
+                    {% if user_role == 2 %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('dashboard') }}">Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('admin') }}">Candidates</a>
+                    </li>
+                    {% endif %}
+                </ul>
             </div>
-            <div class="offcanvas-body">
-              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{ url_for('index') }}" target="_parent">Home</a> 
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{ url_for('vote') }}">Vote!</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{ url_for('about') }}">About</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
-                </li>
-              </ul>
-              <form class="d-flex mt-3 mt-lg-0" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-              </form>
-            </div>
-          </div>
         </div>
-      </nav>    
+    </nav>
 
-<!--Pop ups-->  
-    <div class="alert alert-success" role="alert">
-    Success! you have now logged in into the system.
+    <div class="container">
+        <h2>Vote for Your Candidates</h2>
+
+        <!-- Election Filter Dropdown -->
+        <form method="POST" action="{{ url_for('vote') }}" class="mb-4">
+            <div class="form-group">
+                <label for="electionIdFilter" class="font-weight-bold">Filter by Election:</label>
+                <select id="electionIdFilter" name="electionIdFilter" class="form-control">
+                    <option value="">All Elections</option>
+                    {% for election in elections %}
+                        <option value="{{ election.id }}" {% if selected_election_id == election.id %}selected{% endif %}>{{ election.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary mt-2">Filter</button>
+        </form>
+
+        <!-- Display Current Filter -->
+        <div class="alert alert-info">
+            {% if selected_election_id %}
+                Currently Displaying Candidates for: 
+                {% for election in elections %}
+                    {% if election.id == selected_election_id %}
+                        {{ election.name }}
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                Currently Displaying Candidates for: All Elections
+            {% endif %}
+        </div>
+
+        <!-- Display Candidates -->
+        <form action="{{ url_for('submit_vote') }}" method="POST">
+            <input type="hidden" name="election_id" value="{{ selected_election_id }}">
+            {% for position, candidates in candidates_by_position.items() %}
+                <input type="hidden" name="positions" value="{{ position }}">
+                <h3>{{ position }}</h3>
+                <div class="candidates-list">
+                    {% for candidate in candidates %}
+                        <div class="candidate">
+                            <img src="{{ candidate.image_url }}" alt="{{ candidate.name }}">
+                            <h3>{{ candidate.name }}</h3>
+                            <p>{{ position }}</p>
+                            <div class="radio-group">
+                                <input type="radio" id="candidate_{{ candidate.id }}" name="{{ position }}" value="{{ candidate.id }}">
+                                <label for="candidate_{{ candidate.id }}">Vote</label>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+            <button class="submit-btn" type="submit">Submit Vote</button>
+        </form>
     </div>
 
+    <!-- Modal -->
+    {% if has_voted and selected_election_id %}
+    <div class="modal" tabindex="-1" role="dialog" id="alreadyVotedModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Already Voted</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>You have already voted in this election.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <a href="{{ url_for('vote', electionIdFilter=selected_election_id) }}" class="btn btn-primary">See Candidates Again</a>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
-        // Function to hide the alert after a few seconds
-        setTimeout(function() {
-            var alert = document.getElementById('successAlert');
-            if (alert) {
-                alert.style.display = 'none'; // Hide the alert
-            }
-        }, 3000); // Change 3000 to the number of milliseconds you want (3000 ms = 3 seconds)
+        document.addEventListener('DOMContentLoaded', function () {
+            $('#alreadyVotedModal').modal('show');
+        });
     </script>
+    {% endif %}
 
-<!-- Main container -->
-<div class="container">
-    <!-- Voting Section -->
-    <h2> PRESIDENT </h2>
-    <form action="/vote" method="POST">
-        <div class="candidates-list">
-
-            <!-- Candidate 1 -->
-            <div class="candidate">
-                <img src="https://via.placeholder.com/100" alt="Candidate 1">
-                <h3>Candidate 1</h3>
-                <h4>Bacsarsa</h4>
-                <p>President</p>
-                <div class="radio-group">
-                    <input type="radio" id="president_candidate1" name="president_candidate" value="1">
-                    <label for="president_candidate1">Vote</label>
-                </div>
-            </div>
-            <!-- Candidate 2 -->
-            <div class="candidate">
-                <img src="https://via.placeholder.com/100" alt="Candidate 2">
-                <h3>Candidate 2</h3>
-                <h4>Intino</h4>
-                <p>President</p>
-                <div class="radio-group">
-                    <input type="radio" id="president_candidate2" name="president_candidate" value="2">
-                    <label for="president_candidate2">Vote</label>
-                </div>
-            </div>
-            <!-- Candidate 3 -->
-            <div class="candidate">
-                <img src="https://via.placeholder.com/100" alt="Candidate 3">
-                <h3>Candidate 3</h3>
-                <h4>Lagarto</h4>
-                <p>President</p>
-                <div class="radio-group">
-                    <input type="radio" id="president_candidate3" name="president_candidate" value="3">
-                    <label for="president_candidate3">Vote</label>
-                </div>
-            </div>
-        </div>
-        <button class="submit-btn" type="submit">Submit Vote</button>
-    </form>
-    
-<br>
-<br>
-<br>
-<br>
-<br>
-        <!-- Voting Section -->
-    <h2> VICE PRESIDENT </h2>
-    <form action="#" method="POST">
-        <!-- Candidates List -->
-        <div class="candidates-list">
-            <!-- Candidate 1 -->
-            <div class="candidate">
-                <img src="https://via.placeholder.com/100" alt="Candidate 1">
-                <h3>Candidate 1</h3>
-                <h4>Bacsarsa</h4>
-                <p>Vice President</p>
-                <div class="radio-group">
-                    <input type="radio" id="candidate1" name="candidate" value="1">
-                    <label for="candidate1">Vote</label>
-                </div>
-            </div>
-            <!-- Candidate 2 -->
-            <div class="candidate">
-                <img src="https://via.placeholder.com/100" alt="Candidate 2">
-                <h3>Candidate 2</h3>
-                <h4>Intino</h4>
-                <p>Vice President</p>
-                <div class="radio-group">
-                    <input type="radio" id="candidate2" name="candidate" value="2">
-                    <label for="candidate2">Vote</label>
-                </div>
-            </div>
-            <!-- Candidate 3 -->
-            <div class="candidate">
-                <img src="https://via.placeholder.com/100" alt="Candidate 3">
-                <h3>Candidate 3</h3>
-                <h4>Lagarto</h4>
-                <p>Vice President</p>
-                <div class="radio-group">
-                    <input type="radio" id="candidate3" name="candidate" value="3">
-                    <label for="candidate3">Vote</label>
-                </div>
-            </div>
-        </div>
-        <button class="submit-btn" type="submit">Submit Vote</button>
-    </form>
-<br>
-<br>
-<br>
-<br>
-<br>
-    <!-- Voting Section -->
-    <h2> SECRETARY </h2>
-    <form action="#" method="POST">
-        <!-- Candidates List -->
-        <div class="candidates-list">
-
-
-            <!-- Candidate 1 -->
-            <div class="candidate">
-                <img src="https://via.placeholder.com/100" alt="Candidate 1">
-                <h3>Candidate 1</h3>
-                <h4>Bacsarsa</h4>
-                <p>Secretary</p>
-                <div class="radio-group">
-                    <input type="radio" id="candidate1" name="candidate" value="1">
-                    <label for="candidate1">Vote</label>
-                </div>
-            </div>
-
-
-            <!-- Candidate 2 -->
-            <div class="candidate">
-                <img src="https://via.placeholder.com/100" alt="Candidate 2">
-                <h3>Candidate 2</h3>
-                <h4>Intino</h4>
-                <p>Secretary</p>
-                <div class="radio-group">
-                    <input type="radio" id="candidate2" name="candidate" value="2">
-                    <label for="candidate2">Vote</label>
-                </div>
-            </div>
-
-
-            <!-- Candidate 3 -->
-            <div class="candidate">
-                <img src="https://via.placeholder.com/100" alt="Candidate 3">
-                <h3>Candidate 3</h3>
-                <h4>Lagarto</h4>
-                <p>Secretary</p>
-                <div class="radio-group">
-                    <input type="radio" id="candidate3" name="candidate" value="3">
-                    <label for="candidate3">Vote</label>
-                </div>
-            </div>
-        </div>
-    </form>
-<br>
-<br>
-<br>
-<br>
-<br>
-    <!-- Voting Section -->
-    <h2> TREASURER </h2>
-    <form action="#" method="POST">
-        <!-- Candidates List -->
-        <div class="candidates-list">
-
-
-            <!-- Candidate 1 -->
-            <div class="candidate">
-                <img src="https://via.placeholder.com/100" alt="Candidate 1">
-                <h3>Candidate 1</h3>
-                <h4>Bacsarsa</h4>
-                <p>Treasurer</p>
-                <div class="radio-group">
-                    <input type="radio" id="candidate1" name="candidate" value="1">
-                    <label for="candidate1">Vote</label>
-                </div>
-            </div>
-
-
-            <!-- Candidate 2 -->
-            <div class="candidate">
-                <img src="https://via.placeholder.com/100" alt="Candidate 2">
-                <h3>Candidate 2</h3>
-                <h4>Intino</h4>
-                <p>Treasurer</p>
-                <div class="radio-group">
-                    <input type="radio" id="candidate2" name="candidate" value="2">
-                    <label for="candidate2">Vote</label>
-                </div>
-            </div>
-
-
-            <!-- Candidate 3 -->
-            <div class="candidate">
-                <img src="https://via.placeholder.com/100" alt="Candidate 3">
-                <h3>Candidate 3</h3>
-                <h4>Lagarto</h4>
-                <p>Treasurer</p>
-                <div class="radio-group">
-                    <input type="radio" id="candidate3" name="candidate" value="3">
-                    <label for="candidate3">Vote</label>
-                </div>
-            </div>
-        </div>
-    </form>
-<br>
-<br>
-<br>
-<br>
-<br>
-    <!-- Voting Section -->
-    <h2> AUDITOR </h2>
-    <form action="#" method="POST">
-        <!-- Candidates List -->
-        <div class="candidates-list">
-            
-            <!-- Candidate 1 -->
-            <div class="candidate">
-                <img src="https://via.placeholder.com/100" alt="Candidate 1">
-                <h3>Candidate 1</h3>
-                <h4>Bacsarsa</h4>
-                <p>Auditor</p>
-                <div class="checkbox-group">
-                    <input type="checkbox" id="candidate1" name="candidate" value="1">
-                    <label for="candidate1">Vote</label>
-                </div>
-            </div>
-
-            <!-- Candidate 2 -->
-            <div class="candidate">
-                <img src="https://via.placeholder.com/100" alt="Candidate 2">
-                <h3>Candidate 2</h3>
-                <h4>Intino</h4>
-                <p>Auditor</p>
-                <div class="checkbox-group">
-                    <input type="checkbox" id="candidate2" name="candidate" value="2">
-                    <label for="candidate2">Vote</label>
-                </div>
-            </div>
-
-            <!-- Candidate 3 -->
-            <div class="candidate">
-                <img src="https://via.placeholder.com/100" alt="Candidate 3">
-                <h3>Candidate 3</h3>
-                <h4>Lagarto</h4>
-                <p>Auditor</p>
-                <div class="checkbox-group">
-                    <input type="checkbox" id="candidate3" name="candidate" value="3">
-                    <label for="candidate3">Vote</label>
-                </div>
-            </div>
-        </div>
-    </form>
-<br>
-<br>
-<br>
-<br>
-<br>
-    <!-- Voting Section -->
-    <h2> P.I.O </h2>
-
-
-    <form action="#" method="POST">
-        <!-- Candidates List -->
-        <div class="candidates-list">
-            <!-- Candidate 1 -->
-            <div class="candidate">
-                <img src="https://via.placeholder.com/100" alt="Candidate 1">
-                <h3>Candidate 1</h3>
-                <h4>Bacsarsa</h4>
-                <p>P.I.O</p>
-                <div class="checkbox-group">
-                    <input type="checkbox" id="candidate1" name="candidate" value="1">
-                    <label for="candidate1">Vote</label>
-                </div>
-            </div>
-
-            <!-- Candidate 2 -->
-            <div class="candidate">
-                <img src="https://via.placeholder.com/100" alt="Candidate 2">
-                <h3>Candidate 2</h3>
-                <h4>Intino</h4>
-                <p>P.I.O</p>
-                <div class="checkbox-group">
-                    <input type="checkbox" id="candidate2" name="candidate" value="2">
-                    <label for="candidate2">Vote</label>
-                </div>
-            </div>
-
-            <!-- Candidate 3 -->
-            <div class="candidate">
-                <img src="https://via.placeholder.com/100" alt="Candidate 3">
-                <h3>Candidate 3</h3>
-                <h4>Lagarto</h4>
-                <p>P.I.O</p>
-                <div class="checkbox-group">
-                    <input type="checkbox" id="candidate3" name="candidate" value="3">
-                    <label for="candidate3">Vote</label>
-                </div>
-            </div>
-        </div>
-    </form>
-<br>
-<br>
-<br>
-<br>
-<br>
-    <!-- Voting Section -->
-    <h2> 1st YEAR REPRESENTATIVE </h2>
-    <form action="#" method="POST">
-        <!-- Candidates List -->
-        <div class="candidates-list">
-            <!-- Candidate 1 -->
-            <div class="candidate">
-                <img src="https://via.placeholder.com/100" alt="Candidate 1">
-                <h3>Candidate 1</h3>
-                <h4>Bacsarsa</h4>
-                <p>1st Year Representative</p>
-                <div class="radio-group">
-                    <input type="radio" id="candidate1" name="candidate" value="1">
-                    <label for="candidate1">Vote</label>
-                </div>
-            </div>
-
-            <!-- Candidate 2 -->
-            <div class="candidate">
-                <img src="https://via.placeholder.com/100" alt="Candidate 2">
-                <h3>Candidate 2</h3>
-                <h4>Intino</h4>
-                <p>1st Year Representative</p>
-                <div class="radio-group">
-                    <input type="radio" id="candidate2" name="candidate" value="2">
-                    <label for="candidate2">Vote</label>
-                </div>
-            </div>
-
-            <!-- Candidate 3 -->
-            <div class="candidate">
-                <img src="https://via.placeholder.com/100" alt="Candidate 3">
-                <h3>Candidate 3</h3>
-                <h4>Lagarto</h4>
-                <p>1st Year Representative</p>
-                <div class="radio-group">
-                    <input type="radio" id="candidate3" name="candidate" value="3">
-                    <label for="candidate3">Vote</label>
-                </div>
-            </div>
-        </div>
-    </form>
-<br>
-<br>
-<br>
-<br>
-<br>
-    <!-- Voting Section -->
-    <h2> 2nd YEAR REPRESENTATIVE </h2>
-    <form action="#" method="POST">
-        <!-- Candidates List -->
-        <div class="candidates-list">
-
-            <!-- Candidate 1 -->
-            <div class="candidate">
-                <img src="https://via.placeholder.com/100" alt="Candidate 1">
-                <h3>Candidate 1</h3>
-                <h4>Bacsarsa</h4>
-                <p>2nd Year Representative</p>
-                <div class="radio-group">
-                    <input type="radio" id="candidate1" name="candidate" value="1">
-                    <label for="candidate1">Vote</label>
-                </div>
-            </div>
-
-            <!-- Candidate 2 -->
-            <div class="candidate">
-                <img src="https://via.placeholder.com/100" alt="Candidate 2">
-                <h3>Candidate 2</h3>
-                <h4>Intino</h4>
-                <p>2nd Year Representative</p>
-                <div class="radio-group">
-                    <input type="radio" id="candidate2" name="candidate" value="2">
-                    <label for="candidate2">Vote</label>
-                </div>
-            </div>
-
-            <!-- Candidate 3 -->
-            <div class="candidate">
-                <img src="https://via.placeholder.com/100" alt="Candidate 3">
-                <h3>Candidate 3</h3>
-                <h4>Lagarto</h4>
-                <p>2nd Year Representative</p>
-                <div class="radio-group">
-                    <input type="radio" id="candidate3" name="candidate" value="3">
-                    <label for="candidate3">Vote</label>
-                </div>
-            </div>
-        </div>
-    </form>
-<br>
-<br>
-<br>
-<br>
-<br>
-    <!-- Voting Section -->
-    <h2> 3rd YEAR REPRESENTATIVE </h2>
-    <form action="#" method="POST">
-        <!-- Candidates List -->
-        <div class="candidates-list">
-            
-            <!-- Candidate 1 -->
-            <div class="candidate">
-                <img src="https://via.placeholder.com/100" alt="Candidate 1">
-                <h3>Candidate 1</h3>
-                <h4>Bacsarsa</h4>
-                <p>3rd Year Representative</p>
-                <div class="radio-group">
-                    <input type="radio" id="candidate1" name="candidate" value="1">
-                    <label for="candidate1">Vote</label>
-                </div>
-            </div>
-
-            <!-- Candidate 2 -->
-            <div class="candidate">
-                <img src="https://via.placeholder.com/100" alt="Candidate 2">
-                <h3>Candidate 2</h3>
-                <h4>Intino</h4>
-                <p>3rd Year Representative</p>
-                <div class="radio-group">
-                    <input type="radio" id="candidate2" name="candidate" value="2">
-                    <label for="candidate2">Vote</label>
-                </div>
-            </div>
-
-            <!-- Candidate 3 -->
-            <div class="candidate">
-                <img src="https://via.placeholder.com/100" alt="Candidate 3">
-                <h3>Candidate 3</h3>
-                <h4>Lagarto</h4>
-                <p>3rd Year Representative</p>
-                <div class="radio-group">
-                    <input type="radio" id="candidate3" name="candidate" value="3">
-                    <label for="candidate3">Vote</label>
-                </div>
-            </div>
-        </div>
-    </form>
-<br>
-<br>
-<br>
-<br>
-<br>
-    <!-- Voting Section -->
-    <h2> 4th YEAR REPRESENTATIVE </h2>
-    <form action="#" method="POST">
-            <!-- Candidates List -->
-            <div class="candidates-list">
-                
-                <!-- Candidate 1 -->
-                <div class="candidate">
-                    <img src="https://via.placeholder.com/100" alt="Candidate 1">
-                    <h3>Candidate 1</h3>
-                    <h4>Bacsarsa</h4>
-                    <p>4th Year Representative</p>
-                    <div class="radio-group">
-                        <input type="radio" id="candidate1" name="candidate" value="1">
-                        <label for="candidate1">Vote</label>
-                    </div>
-                </div>
-    
-                <!-- Candidate 2 -->
-                <div class="candidate">
-                    <img src="https://via.placeholder.com/100" alt="Candidate 2">
-                    <h3>Candidate 2</h3>
-                    <h4>Intino</h4>
-                    <p>4th Year Representative</p>
-                    <div class="radio-group">
-                        <input type="radio" id="candidate2" name="candidate" value="2">
-                        <label for="candidate2">Vote</label>
-                    </div>
-                </div>
-    
-                <!-- Candidate 3 -->
-                <div class="candidate">
-                    <img src="https://via.placeholder.com/100" alt="Candidate 3">
-                    <h3>Candidate 3</h3>
-                    <h4>Lagarto</h4>
-                    <p>4th Year Representative</p>
-                    <div class="radio-group">
-                        <input type="radio" id="candidate3" name="candidate" value="3">
-                        <label for="candidate3">Vote</label>
-                    </div>
-                </div>
-            </div>
-    
-        <!-- Submit Vote Button -->
-        <button type="submit" class="submit-btn">Submit Vote</button>
-    </form>
-
-
-<!-- Results Section (displayed after voting) -->
-<div class="results">
-    <table>
-        <thead>
-            <tr>
-                <th>Candidate ID</th>
-                <th>Votes</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for result in vote_results %}
-            <tr>
-                <td>{{ result.candidate_id }}</td>
-                <td>{{ result.votes }}</td>
-            </tr>
-            {% endfor %} 
-        </tbody>
-    </table>
-</div>
-
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-
-
-
-
-

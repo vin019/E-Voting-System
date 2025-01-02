@@ -7,7 +7,6 @@
 <link rel="icon" href="http://127.0.0.1:5000/static/Logo/spark.png" type="image/png">
 <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/navbars-offcanvas/">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
 <link href="http://127.0.0.1:5000/static/assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -21,8 +20,8 @@
                 EVS
             </a>          
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
+                <span class="navbar-toggler-icon"></span>
+            </button>
           <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbar2Label">
             <div class="offcanvas-header">
               <h5 class="offcanvas-title" id="offcanvasNavbar2Label">Offcanvas</h5>
@@ -43,7 +42,13 @@
                     <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="{{url_for(vote_results)}}">View Vote Results</a>
+                    <a class="nav-link" href="{{ url_for('vote_results') }}">Vote Results</a>
+                </li> 
+                <li class="nav-item active" id="dashboardLink" style="display: none;">
+                    <a class="nav-link" href="{{ url_for('dashboard') }}">Users</a>
+                </li>
+                <li class="nav-item active" id="adminLink" style="display: none;">
+                    <a class="nav-link" href="{{ url_for('admin') }}">Candidates</a>
                 </li>
               </ul>
               <form class="d-flex mt-3 mt-lg-0" role="search">
@@ -54,6 +59,23 @@
           </div>
         </div>
       </nav>    
+
+      <script>
+        // Get the user role passed from the backend
+        const userRole = "{{ user_role }}"; // Flask will replace this with the actual role
+    
+        // Get the elements by their IDs
+        const dashboardLink = document.getElementById('dashboardLink');
+        const adminLink = document.getElementById('adminLink');
+    
+        // Check if the user is an admin (role_name is 'admin')
+        if (userRole === 'admin') {
+            // Show the links
+            dashboardLink.style.display = 'block';
+            adminLink.style.display = 'block';
+        }
+        </script>
+
 </head>
 <body>
     <div class="header a">
@@ -94,7 +116,6 @@
             </div>
         </div>
     </section>
-    
     <script src="http://127.0.0.1:5000/static/assets/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>

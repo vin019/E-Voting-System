@@ -4,104 +4,201 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-Voting Admin Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://127.0.0.1:5000/static/CSS/dashboard.css">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/navbars-offcanvas/">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
-    <link href="http://127.0.0.1:5000/static/assets/dist/css/bootstrap.min.css" rel="stylesheet">   
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
-        <!-- Navigation Bar -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="{{ url_for('index') }}">E-Voting System</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('vote') }}">Vote</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('about') }}">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('admin') }}">Admin</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('dashboard') }}">Edit Users</a>
-                        </li>
-                    </ul>
-                </div>
+    <!-- Navigation Bar -->
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand mx-auto d-flex align-items-center" href="{{ url_for('index') }}" > 
+                <img src="http://127.0.0.1:5000/static/Logo/image.png" width="30" height="auto" class="d-inline-block align-top me-2" color alt="">
+                <img src='http://127.0.0.1:5000/static/Logo/LNU.PNG' width="33" height="auto" class="d-inline-block align-top me-3" alt="">
+                EVS
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ url_for('index') }}">Home</a> 
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ url_for('vote') }}">Vote!</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ url_for('about') }}">About</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ url_for('vote_results') }}">Vote Results</a>
+                    </li> 
+                    <li class="nav-item active" >
+                        <a class="nav-link" href="{{ url_for('dashboard') }}">Users</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ url_for('admin') }}">Candidates</a>
+                    </li>
+                  </ul>
             </div>
-        </nav>
+        </div>
+    </nav>
 
-    <div class="dashboard-container">
-
-        <header class="dashboard-header">
+    <div class="container mt-5">
+        <header class="text-center mb-4">
             <h1>E-Voting Admin Dashboard</h1>
-            <p>Track user activities in the e-voting system.</p>
+            <p class="lead">Track user activities in the e-voting system.</p>
         </header>
 
-        <div class="stats-container">
-            <div class="stat-box">
-                <h3>Total Logins</h3>
-                <p id="totalLogins">0</p>
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card text-white bg-info mb-3">
+                    <div class="card-header">Total Logins</div>
+                    <div class="card-body">
+                        <h5 class="card-title" id="totalLogins">{{ total_logins }}</h5>
+                    </div>
+                </div>
             </div>
-            <div class="stat-box">
-                <h3>Email Changes</h3>
-                <p id="totalEmailChanges">0</p>
+            <div class="col-md-3">
+                <div class="card text-white bg-success mb-3">
+                    <div class="card-header">Total Users</div>
+                    <div class="card-body">
+                        <h5 class="card-title" id="totalUsers">{{ total_users }}</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-white bg-warning mb-3">
+                    <div class="card-header">Total Admins</div>
+                    <div class="card-body">
+                        <h5 class="card-title" id="totalAdmins">{{ total_admins }}</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-white bg-danger mb-3">
+                    <div class="card-header">Total Votes Cast</div>
+                    <div class="card-body">
+                        <h5 class="card-title" id="totalVotes">{{ total_votes }}</h5>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="search-bar">
-            <input type="text" id="searchInput" placeholder="Search by User ID or Email...">
-        </div>
-
-        <h2>Logged In Users</h2>
-        <div class="table-container">
-            <table id="loginTable">
-                <thead>
+        <h2 class="mb-4">Users</h2>
+        <div class="table-responsive">
+            <table id="userTable" class="table table-striped table-bordered">
+                <thead class="thead-dark">
                     <tr>
                         <th>User ID</th>
+                        <th>Username</th>
                         <th>Email</th>
-                        <th>Last Login</th>
+                        <th>Role ID</th>
+                        <th>Role Name</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-
-                </tbody>
-            </table>
-        </div>
-
-        <h2>Email Change Logs</h2>
-        <div class="table-container">
-            <table id="emailChangeTable">
-                <thead>
-                    <tr>
-                        <th>User ID</th>
-                        <th>Old Email</th>
-                        <th>New Email</th>
-                        <th>Change Timestamp</th>
+                    {% for user in users %}
+                    <tr id="user-row-{{ user.id }}">
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.role_id }}</td>
+                        <td>{{ user.role_name }}</td>
+                        <td>
+                            {% if user.role_id == 1 %}
+                                <button onclick="grantAdmin({{ user.id }})" class="btn btn-primary btn-sm">Grant Admin</button>
+                            {% elif user.role_id == 2 %}
+                                <button onclick="revokeAdmin({{ user.id }})" class="btn btn-warning btn-sm">Revoke Admin</button>
+                            {% else %}
+                                <button disabled class="btn btn-secondary btn-sm">No Action</button>
+                            {% endif %}
+                            <button onclick="deleteUser({{ user.id }})" class="btn btn-danger btn-sm">Delete</button>
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-
+                    {% endfor %}
                 </tbody>
             </table>
-        </div>
-
-        <h2>Login Activity</h2>
-        <div class="chart-container">
-            <canvas id="loginChart"></canvas>
         </div>
     </div>
 
-    <script src="dashboard.js"></script>
+    <!-- Bootstrap and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <script>
+        function grantAdmin(userId) {
+            fetch(`/grant_admin/${userId}`, {
+                method: 'POST',
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Admin privileges granted successfully:', data);
+                alert('Admin privileges granted successfully!');
+                location.reload();  // Refresh the page to show updated data
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+                alert('An error occurred while granting admin privileges.');
+            });
+        }
+
+        function revokeAdmin(userId) {
+            fetch(`/remove_admin/${userId}`, {
+                method: 'POST',
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Admin privileges revoked successfully:', data);
+                alert('Admin privileges revoked successfully!');
+                location.reload();  // Refresh the page to show updated data
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+                alert('An error occurred while revoking admin privileges.');
+            });
+        }
+
+        function deleteUser(userId) {
+            fetch(`/delete_user/${userId}`, {
+                method: 'DELETE',
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('User deleted successfully:', data);
+                alert('User deleted successfully!');
+                document.getElementById(`user-row-${userId}`).remove();  // Remove the user row from the table
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+                alert('An error occurred while deleting the user.');
+            });
+        }
+    </script>
 </body>
 </html>

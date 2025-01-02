@@ -4,123 +4,289 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-Voting Admin Dashboard</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="http://127.0.0.1:5000/static/CSS/admin.css">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/navbars-offcanvas/">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
-    <link href="http://127.0.0.1:5000/static/assets/dist/css/bootstrap.min.css" rel="stylesheet">
-
+    <style>
+        .form-control {
+            width: 100%;
+        }
+        .btn {
+            width: 100%;
+            padding: 10px;
+        }
+        .card {
+            max-width: 100%;
+            margin: auto;
+        }
+        .card img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto 10px auto;
+        }
+        .candidate p {
+            margin: 5px 0;
+            text-align: center;
+        }
+        .candidate h3 {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{{ url_for('index') }}">E-Voting System</a>
+            <a class="navbar-brand mx-auto d-flex align-items-center" href="{{ url_for('index') }}" > 
+                <img src="http://127.0.0.1:5000/static/Logo/image.png" width="30" height="auto" class="d-inline-block align-top me-2" alt="">
+                <img src='http://127.0.0.1:5000/static/Logo/LNU.PNG' width="33" height="auto" class="d-inline-block align-top me-3" alt="">
+                EVS
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('vote') }}">Vote</a>
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ url_for('index') }}">Home</a> 
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ url_for('vote') }}">Vote!</a>
+                    </li>
+                    <li class="nav-item active">
                         <a class="nav-link" href="{{ url_for('about') }}">About</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('admin') }}">Admin</a>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ url_for('vote_results') }}">Vote Results</a>
+                    </li> 
+                    <li class="nav-item active" >
+                        <a class="nav-link" href="{{ url_for('dashboard') }}">Users</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('dashboard') }}">Edit Users</a>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ url_for('admin') }}">Candidates</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <div class="admin-container">
-        <header class="admin-header">
+    <div class="admin-container container mt-5">
+        <header class="admin-header mb-5">
             <h1>Admin Dashboard</h1>
             <p>Manage candidates and oversee the e-voting process.</p>
         </header>
 
-        <h2>Add New Candidate</h2>
-        <form action="{{ url_for('add_candidate') }}" method="POST" style="max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; background-color: #f9f9f9; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
-            <div style="margin-bottom: 15px;">
-                <label for="candidateName" style="font-weight: bold;">Candidate Name:</label>
-                <input type="text" id="candidateName" name="candidateName" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
-            </div>
-            <div style="margin-bottom: 15px;">
-                <label for="candidatePosition" style="font-weight: bold;">Position:</label>
-                <input type="text" id="candidatePosition" name="candidatePosition" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
-            </div>
-            
-            <h3 style="margin-top: 20px;">Add New Election (Optional)</h3>
-            <div style="margin-bottom: 15px;">
-                <label for="electionId" style="font-weight: bold;">Election ID:</label>
-                <input type="text" id="electionId" name="electionId" placeholder="Enter new election ID (if applicable)" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
-            </div>
-            <div style="margin-bottom: 15px;">
-                <label for="electionName" style="font-weight: bold;">Election Name:</label>
-                <input type="text" id="electionName" name="electionName" placeholder="Enter election name (if applicable)" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
-            </div>
-            <div style="margin-bottom: 15px;">
-                <label for="startDate" style="font-weight: bold;">Start Date:</label>
-                <input type="date" id="startDate" name="startDate" placeholder="Select start date (if applicable)" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
-            </div>
-            <div style="margin-bottom: 15px;">
-                <label for="endDate" style="font-weight: bold;">End Date:</label>
-                <input type="date" id="endDate" name="endDate" placeholder="Select end date (if applicable)" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
-            </div>  
-        
-            <div style="margin-bottom: 15px;">
-                <label for="existingElectionId" style="font-weight: bold;">Or select an existing election ID:</label>
-                <select id="existingElectionId" name="existingElectionId" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
-                    <option value="">Select an existing election ID</option>
+        <!-- Filter candidates by election -->
+        <form method="POST" class="mb-4">
+            <div class="form-group">
+                <label for="electionIdFilter" class="font-weight-bold">Filter by Election:</label>
+                <select id="electionIdFilter" name="electionIdFilter" class="form-control">
+                    <option value="">All Elections</option>
                     {% for election in elections %}
-                        <option value="{{ election.id, election.name }}">{{ election.id, election.name }}</option>
+                        <option value="{{ election.id }}" {% if selected_election_id == election.id %}selected{% endif %}>{{ election.name }}</option>
                     {% endfor %}
                 </select>
             </div>
-            <button type="submit" style="width: 100%; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 4px; font-size: 16px; cursor: pointer;">Add Candidate</button>
+            <button type="submit" class="btn btn-primary mt-2">Filter</button>
+        </form>
+
+        <!-- Add candidate -->
+        <h2 class="mb-4">Add New Candidate</h2>
+        <form action="{{ url_for('add_candidate') }}" method="POST" class="mb-5 p-4 border rounded bg-light shadow-sm">
+            <div class="form-group mb-3">
+                <label for="candidateName" class="font-weight-bold">Candidate Name:</label>
+                <input type="text" id="candidateName" name="candidateName" required class="form-control">
+            </div>
+            <div class="form-group mb-3">
+                <label for="candidatePosition" class="font-weight-bold">Position:</label>
+                <select id="candidatePosition" name="candidatePosition" required class="form-control">
+                    {% for position in positions %}
+                        <option value="{{ position.id }}">{{ position.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group mb-3">
+                <label for="imageUrl" class="font-weight-bold">Image URL (Optional):</label>
+                <input type="text" id="imageUrl" name="imageUrl" class="form-control">
+            </div>
+
+            <h3 class="mt-4 mb-3">Add New Election (Optional)</h3>
+            <div class="form-group mb-3">
+                <label for="electionId" class="font-weight-bold">Election ID:</label>
+                <input type="text" id="electionId" name="electionId" placeholder="Enter new election ID (if applicable)" class="form-control">
+            </div>
+            <div class="form-group mb-3">
+                <label for="electionName" class="font-weight-bold">Election Name:</label>
+                <input type="text" id="electionName" name="electionName" placeholder="Enter election name (if applicable)" class="form-control">
+            </div>
+            <div class="form-group mb-3">
+                <label for="startDate" class="font-weight-bold">Start Date:</label>
+                <input type="date" id="startDate" name="startDate" placeholder="Select start date (if applicable)" class="form-control">
+            </div>
+            <div class="form-group mb-3">
+                <label for="endDate" class="font-weight-bold">End Date:</label>
+                <input type="date" id="endDate" name="endDate" placeholder="Select end date (if applicable)" class="form-control">
+            </div>  
+            
+            <div class="form-group mb-3">
+                <label for="existingElectionId" class="font-weight-bold">Or select an existing election ID:</label>
+                <select id="existingElectionId" name="existingElectionId" class="form-control">
+                    <option value="">Select an existing election ID</option>
+                    {% for election in elections %}
+                        <option value="{{ election.id }}">{{ election.id }} - {{ election.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Add Candidate</button>
         </form>
         
-        <h2>Candidates</h2>
-        <div class="candidates-list">
+        <h2 class="mb-4">Candidates</h2>
+        <div class="candidates-list row">
             {% for candidate in candidates %}
-            <div class="candidate" id="candidate{{ candidate.id }}" style="margin-bottom: 20px; padding: 10px; border: 1px solid #ccc; border-radius: 8px; background-color: #f9f9f9;">
-                <h3>{{ candidate.name }}</h3>
-                <p>Position: {{ candidate.position }}</p>
-                <p>Election: {{ candidate.election_name if candidate.election_name else 'Not Assigned' }}</p>
-                <button type="button" onclick="openEditModal({{ candidate.id }}, '{{ candidate.name }}', '{{ candidate.position }}')" style="background-color:rgb(220, 181, 53); border-radius: 4px; padding: 5px 10px; cursor: pointer;">Edit</button>
-                <button type="button" onclick="deleteCandidate({{ candidate.id }})" style="background-color: #dc3545; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer;">Delete</button>
+            <div class="candidate col-md-4 mb-4" id="candidate-row-{{ candidate.id }}">
+                <div class="card p-3 border rounded bg-light shadow-sm">
+                    <img src="{{ candidate.image_url }}" alt="Candidate Image" class="img-fluid">
+                    <h3>{{ candidate.name }}</h3>
+                    <p>Position: {{ candidate.position_name }}</p>
+                    <p>Election: {{ candidate.election_name if candidate.election_name else 'Not Assigned' }}</p>
+                    <button type="button" class="btn btn-warning btn-sm mr-2 mb-2" onclick="openEditModal({{ candidate.id }}, '{{ candidate.name }}', '{{ candidate.position_id }}', '{{ candidate.election_id }}', '{{ candidate.image_url }}')">Edit</button>
+                    <button type="button" class="btn btn-danger btn-sm mb-2" onclick="deleteCandidate({{ candidate.id }})">Delete</button>
+                </div>
             </div>
             {% endfor %}
         </div>
     </div>
 
+    <!-- Edit Candidate Modal -->
+    <div class="modal fade" id="editCandidateModal" tabindex="-1" role="dialog" aria-labelledby="editCandidateModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editCandidateModalLabel">Edit Candidate</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editCandidateForm">
+                        <input type="hidden" id="editCandidateId" name="candidateId">
+                        <div class="form-group">
+                            <label for="editCandidateName">Candidate Name</label>
+                            <input type="text" class="form-control" id="editCandidateName" name="candidateName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editCandidatePosition">Position</label>
+                            <select class="form-control" id="editCandidatePosition" name="candidatePosition" required>
+                                {% for position in positions %}
+                                    <option value="{{ position.id }}">{{ position.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="editElectionId">Election ID</label>
+                            <input type="text" class="form-control" id="editElectionId" name="electionId">
+                        </div>
+                        <div class="form-group">
+                            <label for="editImageUrl">Image URL (Optional)</label>
+                            <input type="text" class="form-control" id="editImageUrl" name="imageUrl">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>    
+
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <!-- Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     <script>
-        function openEditModal(id, name, position) {
-            // Implement the modal opening logic here
-        }
         function deleteCandidate(candidateId) {
-            if (confirm('Are you sure you want to delete this candidate?')) {
-                // Make an AJAX request to delete the candidate
-                fetch(`/delete_candidate/${candidateId}`, {
-                    method: 'DELETE'
-                })
-                .then(response => {
-                    if (response.ok) {
-                        document.getElementById(`candidate${candidateId}`).remove();
-                        alert('Candidate deleted successfully.');
-                    } else {
-                        alert('Error deleting candidate.');
-                    }
-                });
-            }
+            fetch(`/delete_candidate/${candidateId}`, {
+                method: 'DELETE',
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Candidate deleted successfully:', data);
+                alert('Candidate deleted successfully!');
+                // Ensure the correct ID is used to remove the element
+                document.getElementById(`candidate-row-${candidateId}`).remove();
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+                alert('An error occurred while deleting the candidate.');
+            });
         }
+
+        function openEditModal(candidateId, candidateName, candidatePosition, electionId, imageUrl) {
+            // Set the values of the form fields with the current candidate information
+            document.getElementById('editCandidateId').value = candidateId;
+            document.getElementById('editCandidateName').value = candidateName;
+            document.getElementById('editCandidatePosition').value = candidatePosition;
+            document.getElementById('editElectionId').value = electionId || '';
+            document.getElementById('editImageUrl').value = imageUrl || '';
+
+            // Show the modal
+            $('#editCandidateModal').modal('show');
+        }
+
+        // Handle form submission for editing candidate details
+        document.getElementById('editCandidateForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const candidateId = document.getElementById('editCandidateId').value;
+            const candidateName = document.getElementById('editCandidateName').value;
+            const candidatePosition = document.getElementById('editCandidatePosition').value;
+            const electionId = document.getElementById('editElectionId').value;
+            const imageUrl = document.getElementById('editImageUrl').value;
+
+            fetch(`/edit_candidate/${candidateId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    candidateName: candidateName,
+                    candidatePosition: candidatePosition,
+                    electionId: electionId,
+                    imageUrl: imageUrl,
+                }),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Candidate updated successfully:', data);
+                alert('Candidate updated successfully!');
+                window.location.reload(); // Refresh the page to show updated data
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+                alert('An error occurred while updating the candidate.');
+            });
+
+            $('#editCandidateModal').modal('hide');
+        });
     </script>
 </body>
 </html>
